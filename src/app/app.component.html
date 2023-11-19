@@ -1,0 +1,46 @@
+<div id="app">
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">GTI619</a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+    
+      <li class="nav-item">
+        <a href="/tableau-de-bord" class="nav-link" routerLink="tableau-de-bord">Tableau de bord </a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/administration" class="nav-link" routerLink="administration">Administration</a>
+      </li>
+      <li class="nav-item" *ngIf="showPrepAff">
+        <a href="/clients-affaires" class="nav-link" routerLink="clients-affaires">Clients Affaires</a>
+      </li>
+      
+      <li class="nav-item" *ngIf="showPrepRes">
+        <a href="/clients-residentiels" class="nav-link" routerLink="clients-residentiels">Clients Résidentiels</a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/utilisateurs" class="nav-link"  routerLink="utilisateurs">Utilisateurs</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link" routerLink="login">Login</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logout()">LogOut</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
