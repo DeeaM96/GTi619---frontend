@@ -1,5 +1,10 @@
-<div class="container">
+<div class="container" *ngIf="permission" >
   <header class="jumbotron">
     <p>{{ content }}</p>
   </header>
 </div>
+
+
+<div *ngIf="!permission" >
+  <app-noAccess/>
+ </div>

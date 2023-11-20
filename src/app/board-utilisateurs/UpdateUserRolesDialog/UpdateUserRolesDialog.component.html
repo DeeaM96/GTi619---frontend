@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Update Roles</h1>
+<div mat-dialog-content>
+  <form #roleForm="ngForm">
+    <mat-form-field>
+      <mat-label>Roles</mat-label>
+      <mat-select [(ngModel)]="selectedRoles" name="roles" multiple>
+        <mat-option *ngFor="let role of availableRoles" [value]="role.value" >
+          {{ role.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-danger m-5"  [mat-dialog-close]="false">Cancel</button>
+  <button  class="btn btn-primary"  [mat-dialog-close]="selectedRoles" (click)="updateRoles()">Update Roles</button>
+</div>

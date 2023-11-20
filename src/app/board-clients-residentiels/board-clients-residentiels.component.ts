@@ -8,6 +8,7 @@ import { UserService } from '../_services/user.service';
 })
 export class BoardClientsResidentielsComponent implements OnInit {
 
+  permission=true;
   content?: string;
 
   constructor(private userService: UserService) { }
@@ -18,6 +19,7 @@ export class BoardClientsResidentielsComponent implements OnInit {
         this.content = data;
       },
       error: err => {
+        this.permission=false;
         if (err.error) {
           try {
             const res = JSON.parse(err.error);

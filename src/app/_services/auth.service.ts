@@ -40,4 +40,31 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(AUTH_API + 'signout', { }, httpOptions);
   }
+
+  createUser(username: string, email: string, password: string, role:string[]): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'createUser',
+      {
+        username,
+        email,
+        password,
+        role
+        
+      },
+      httpOptions
+    );
+  }
+
+  updateRoles(username: string, newRoles:string[]): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'updateRole',
+      {
+        username,
+      
+        newRoles
+        
+      },
+      httpOptions
+    );
+  }
 }

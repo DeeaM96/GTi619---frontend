@@ -1,0 +1,41 @@
+
+
+
+<h1 mat-dialog-title>Create New User</h1>
+<div mat-dialog-content>
+  <form #userForm="ngForm">
+    <mat-form-field >
+      <mat-label>Username</mat-label>
+      <input matInput type="text" [(ngModel)]="userData.username" name="username" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="userData.email" name="email" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="userData.password" name="password" #password="ngModel" (ngModelChange)="checkPasswords()" required>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" [(ngModel)]="userData.confirmPassword" name="confirmPassword" #confirmPassword="ngModel" required (ngModelChange)="checkPasswords()">
+     
+      
+      <p *ngIf="passwordMismatch" class="custom-error">Passwords do not match</p>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Roles</mat-label>
+      <mat-select [(ngModel)]="userData.role" name="roles" multiple required>
+        <mat-option *ngFor="let role of availableRoles" [value]="role.value">{{ role.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-danger m-5" [mat-dialog-close]="true">Cancel</button>
+  <button class="btn btn-primary" (click)="createUser()">Create</button>
+</div>

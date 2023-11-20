@@ -9,6 +9,7 @@ import { UserService } from '../_services/user.service';
 export class BoardClientsAffairesComponent implements OnInit {
 
   content?: string;
+  permission=true;
 
   constructor(private userService: UserService) { }
 
@@ -18,10 +19,12 @@ export class BoardClientsAffairesComponent implements OnInit {
         this.content = data;
       },
       error: err => {
+       this. permission=false;
         if (err.error) {
           try {
             const res = JSON.parse(err.error);
             this.content = res.message;
+            
           } catch {
             this.content = `Error with status: ${err.status} - ${err.statusText}`;
           }

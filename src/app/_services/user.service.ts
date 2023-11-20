@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const API_URL = 'http://localhost:5050/api/test/';
+const API_USERS_URL = 'http://localhost:5050/api/';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,7 @@ export class UserService {
   }
 
   getUtilisateursBoard(): Observable<any> {
-    return this.http.get(API_URL + 'utilisateurs', { responseType: 'text' });
+    return this.http.get(API_USERS_URL + 'utilisateurs/get' );
   }
 
   getAdminBoard(): Observable<any> {

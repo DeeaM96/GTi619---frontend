@@ -8,6 +8,7 @@ import { UserService } from '../_services/user.service';
 })
 export class BoardAdminComponent implements OnInit {
   content?: string;
+  permission=true;
 
   constructor(private userService: UserService) { }
 
@@ -17,6 +18,7 @@ export class BoardAdminComponent implements OnInit {
         this.content = data;
       },
       error: err => {
+        this. permission=false;
         if (err.error) {
           try {
             const res = JSON.parse(err.error);
