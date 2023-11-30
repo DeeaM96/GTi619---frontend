@@ -9,6 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class CreateUserDialogComponent implements OnInit {
   passwordMismatch = false;
+  errorMessage='';
   
   constructor(private authService:AuthService,  private dialogRef: MatDialogRef<CreateUserDialogComponent> // Inject the MatDialogRef
   ) { }
@@ -39,12 +40,13 @@ export class CreateUserDialogComponent implements OnInit {
         },
         error: err => {
          console.log(err)
+         this.errorMessage=err.error.message;
         }
       });
     
       // proceed with form submission
     } else {
-      // handle the error case
+      this.errorMessage="Passwords do not match!";
     }
   }
 

@@ -4,6 +4,7 @@ import { User } from '../_common/user';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserDialogComponent } from './CreateUserDialog/CreateUserDialog.component';
 import { UpdateUserRolesDialogComponent } from './UpdateUserRolesDialog/UpdateUserRolesDialog.component';
+import { UpdatePasswordDialogComponent } from './UpdatePasswordDialog/UpdatePasswordDialog.component';
 
 
 @Component({
@@ -80,7 +81,17 @@ export class BoardUtilisateursComponent implements OnInit {
   }
 
   modifyPassword(user: User) {
-    // Open modal for modifying password
-    // Implement the logic to update the password
+    const dialogRef = this.dialog.open(UpdatePasswordDialogComponent, {
+      width: '300px',
+      data: { user: user } // Pass the current roles of the user
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Dialog result:', result);
+        this.reloadUserList();
+        // Call service to update user roles
+      }
+    });
   }
 }

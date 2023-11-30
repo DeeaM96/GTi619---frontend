@@ -1,3 +1,7 @@
+<div *ngIf="!permission" >
+  <app-noAccess/>
+ </div>
+
 <div class="container" *ngIf="permission">
   <h2>Utilisateurs</h2>
 
@@ -39,6 +43,3 @@
 </div>
 
 
-<div *ngIf="!permission" >
- <app-noAccess/>
-</div>

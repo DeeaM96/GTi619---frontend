@@ -26,6 +26,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { CreateUserDialogComponent } from './board-utilisateurs/CreateUserDialog/CreateUserDialog.component';
 import { NoAccessComponent } from './noAccess/noAccess.component';
 import { UpdateUserRolesDialogComponent } from './board-utilisateurs/UpdateUserRolesDialog/UpdateUserRolesDialog.component';
+import { UpdatePasswordDialogComponent } from './board-utilisateurs/UpdatePasswordDialog/UpdatePasswordDialog.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { UpdateUserRolesDialogComponent } from './board-utilisateurs/UpdateUserR
       BoardUtilisateursComponent,
       CreateUserDialogComponent,
       NoAccessComponent,
-      UpdateUserRolesDialogComponent
+      UpdateUserRolesDialogComponent,
+      UpdatePasswordDialogComponent
    ],
   imports: [
     BrowserModule,
