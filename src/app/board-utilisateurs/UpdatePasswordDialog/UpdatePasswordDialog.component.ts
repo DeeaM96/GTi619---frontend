@@ -46,7 +46,7 @@ export class UpdatePasswordDialogComponent implements OnInit {
         error => {
           // Handle error
           console.error("Error updating password", error);
-          this.errorMessage=error.error.message;
+          this.errorMessage=error.error.message || error.error;
         }
       );
   }

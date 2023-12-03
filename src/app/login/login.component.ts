@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           this.storageService.saveUser(err.error);
           this.router.navigate(['/change-password']);
         } else {
-          this.errorMessage = err.error.message;
+          this.errorMessage = err.error.message || err.error;
           this.isLoginFailed = true;
         }
        

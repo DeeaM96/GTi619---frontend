@@ -2,3 +2,37 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* General toastr styling */
+.toast-container {
+    z-index: 1050 !important; /* Adjust as needed */
+    font-family: 'Arial', sans-serif; /* Use your preferred font */
+  }
+  
+  /* Success toastr - green background with additional styling */
+  .toast-success {
+    background-color: #28a745 !important; /* Bootstrap success color */
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Error toastr - red background with additional styling */
+  .toast-error {
+    background-color: #dc3545 !important; /* Bootstrap danger color */
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Toast message styling */
+  .toast-message {
+    font-size: 16px; /* Adjust size as needed */
+  }
+  
+  /* Toast title styling */
+  .toast-title {
+    font-weight: bold;
+  }
+  
+  

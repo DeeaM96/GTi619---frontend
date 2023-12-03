@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +29,10 @@ import { UpdateUserRolesDialogComponent } from './board-utilisateurs/UpdateUserR
 import { UpdatePasswordDialogComponent } from './board-utilisateurs/UpdatePasswordDialog/UpdatePasswordDialog.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [						
@@ -61,7 +64,16 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+   MatTabsModule ,
+   ReactiveFormsModule,
+   MatCheckboxModule,
+   ToastrModule.forRoot({
+    positionClass: 'toast-top-center' // or 'toast-bottom-left'
+  }),
+
+   
+
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

@@ -64,7 +64,7 @@ export class ChangePasswordComponent implements OnInit {
             },
             error: err => {
               debugger;
-              this.errorMessage = err.error.message;
+              this.errorMessage = err.error.message || err.error;
 
             }
           });

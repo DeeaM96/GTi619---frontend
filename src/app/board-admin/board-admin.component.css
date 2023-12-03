@@ -1,0 +1,28 @@
+mat-form-field {
+    width: 100%; /* Full width */
+    display: block; /* Each field on a new line */
+    margin-bottom: 15px; /* Spacing between fields */
+  }
+
+  mat-checkbox {
+    width: 100%; /* Full width */
+    display: block; /* Each field on a new line */
+    margin-bottom: 15px; /* Spacing between fields */
+  }
+  
+  /* Centering the form within the dialog */
+  .mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+  

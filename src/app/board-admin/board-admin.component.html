@@ -1,10 +1,76 @@
-<div class="container" *ngIf="permission" >
-  <header class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
+<div class="container centered-content" *ngIf="permission">
+  <mat-tab-group [(selectedIndex)]="activeTabIndex">
+    <mat-tab label="Connexion" >
+    
+
+        <mat-form-field class="mt-5"  >
+          <mat-label>Tentatives Max avant changement de mot de passe</mat-label>
+          <input matInput type="text" [(ngModel)]="loginSettingsForm.maxLoginAttempts" type="number" placeholder="Tentatives Max">
+        </mat-form-field>
+
+        <mat-form-field class="mt-3" >
+          <mat-label>Tentatives Max Avant Désactivation </mat-label>
+          <input matInput type="text" [(ngModel)]="loginSettingsForm.maxLoginAttemptsBeforeDisable" type="number" placeholder="Tentatives Max Avant Désactivation">
+        </mat-form-field>
+
+        <mat-form-field class="mt-3" >
+          <mat-label>Temps pour Essayer Encore (secondes)</mat-label>
+          <input matInput type="text" [(ngModel)]="loginSettingsForm.loginRetryInterval" type="number" placeholder="Temps pour Essayer Encore (secondes)">
+        </mat-form-field>
+    
+     
+    
+    </mat-tab>
+    <mat-tab label="Mot de Passe">
+    
+        <mat-form-field  class=" mt-5">
+          <mat-label>Longueur Minimale</mat-label>
+          <input matInput  [(ngModel)]="passwordSettingsForm.minLength" type="number" placeholder="Longueur Minimale">
+        </mat-form-field>
+
+       
+
+        <mat-checkbox  class="mt-3"  [(ngModel)]="passwordSettingsForm.requireUppercase" name="requireUppercase">
+          Inclure au moins une Majuscule
+        
+        </mat-checkbox>
+      
+        <mat-checkbox  class="mt-3"  [(ngModel)]="passwordSettingsForm.requireLowercase" name="requireLowercase">
+          Inclure au moins une minuscule
+        </mat-checkbox>
+      
+        <mat-checkbox  class="mt-3"  [(ngModel)]="passwordSettingsForm.requireDigits" name="requireDigits">
+          Inclure au moins un chiffre
+        </mat-checkbox>
+      
+        <mat-checkbox  class="mt-3"  [(ngModel)]="passwordSettingsForm.requireSpecial" name="requireSpecial">
+          Inclure au moins un Caractère Spécial
+        </mat-checkbox>
+      
+
+ 
+      
+      
+    </mat-tab>
+    <mat-tab label="Modification de Mot de Passe">
+     
+        <mat-form-field class="mx-5 mt-5" >
+          <mat-label>Réutilisation Après Nombre de Changements</mat-label>
+          <input matInput   type="number" [(ngModel)]="passwordChangeSettingsForm.reuseHistory"  placeholder="Réutilisation Après Nombre de Changements">
+        </mat-form-field>
+
+        <mat-form-field class="m-5" >
+          <mat-label>Intervalle Entre Modifications (jours)</mat-label>
+          <input matInput   type="number" [(ngModel)]="passwordChangeSettingsForm.changeInterval"  placeholder="Intervalle Entre Modifications (jours)">
+        </mat-form-field>
+     
+     
+    </mat-tab>
+  </mat-tab-group>
+
+  <button class="btn btn-primary mx-5" (click)="saveSettings()">Enregistrer</button>
 </div>
 
-
-<div *ngIf="!permission" >
+<div *ngIf="!permission">
   <app-noAccess/>
- </div>
+</div>
