@@ -27,10 +27,12 @@ import { CreateUserDialogComponent } from './board-utilisateurs/CreateUserDialog
 import { NoAccessComponent } from './noAccess/noAccess.component';
 import { UpdateUserRolesDialogComponent } from './board-utilisateurs/UpdateUserRolesDialog/UpdateUserRolesDialog.component';
 import { UpdatePasswordDialogComponent } from './board-utilisateurs/UpdatePasswordDialog/UpdatePasswordDialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
-  declarations: [					
+  declarations: [						
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -44,7 +46,8 @@ import { UpdatePasswordDialogComponent } from './board-utilisateurs/UpdatePasswo
       CreateUserDialogComponent,
       NoAccessComponent,
       UpdateUserRolesDialogComponent,
-      UpdatePasswordDialogComponent
+      UpdatePasswordDialogComponent,
+      ChangePasswordComponent
    ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { UpdatePasswordDialogComponent } from './board-utilisateurs/UpdatePasswo
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

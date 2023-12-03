@@ -1,8 +1,38 @@
+
+<h2>Clients Affaire</h2>
 <div class="container" *ngIf="permission" >
-  <header class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
-</div>
+  
+
+      <mat-table [dataSource]="clients" class="mat-elevation-z8">
+        <ng-container matColumnDef="nom">
+          <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.nom}} </mat-cell>
+        </ng-container>
+    
+        <!-- Username Column -->
+        <ng-container matColumnDef="prenom">
+          <mat-header-cell *matHeaderCellDef> Prenom </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.prenom}} </mat-cell>
+        </ng-container>
+    
+        <!-- Email Column -->
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.typeName}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    
+    
+      <mat-paginator [length]="totalElements"
+                     [pageSize]="size"
+                     [pageSizeOptions]="[5, 10, 25, 100]"
+                     (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+
 
 
 <div *ngIf="!permission" >

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { StorageService } from './_services/storage.service';
 import { AuthService } from './_services/auth.service';
 import { EventBusService } from './_shared/event-bus.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -23,27 +24,49 @@ export class AppComponent {
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
-    private eventBusService: EventBusService
+    private eventBusService: EventBusService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
 
     if (this.isLoggedIn) {
-      const user = this.storageService.getUser();
-      this.roles = user.roles;
-
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showPrepAff = this.roles.includes('ROLE_PREP_AFF') ||   this.roles.includes('ROLE_ADMIN');
-      this.showPrepRes = this.roles.includes('ROLE_PREP_RES') ||   this.roles.includes('ROLE_ADMIN');
-
-
-      this.username = user.username;
+      this.updateUserState();
+    } else {
+      this.router.navigate(['/login']);
     }
+  
+    this.eventBusSub = this.eventBusService.on('login',() => {
+      this.isLoggedIn = true;
+      this.updateUserState();
+    });
+
+    // if (this.isLoggedIn) {
+    //   const user = this.storageService.getUser();
+    //   this.roles = user.roles;
+
+    //   this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+    //   this.showPrepAff = this.roles.includes('ROLE_PREP_AFF') ||   this.roles.includes('ROLE_ADMIN');
+    //   this.showPrepRes = this.roles.includes('ROLE_PREP_RES') ||   this.roles.includes('ROLE_ADMIN');
+
+
+    //   this.username = user.username;
+    // }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {
       this.logout();
     });
+  }
+
+  updateUserState(): void {
+    const user = this.storageService.getUser();
+    this.roles = user.roles;
+  
+    this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+    this.showPrepAff = this.roles.includes('ROLE_PREP_AFF') || this.roles.includes('ROLE_ADMIN');
+    this.showPrepRes = this.roles.includes('ROLE_PREP_RES') || this.roles.includes('ROLE_ADMIN');
+    this.username = user.username;
   }
 
   logout(): void {
@@ -58,5 +81,11 @@ export class AppComponent {
         console.log(err);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.eventBusSub) {
+      this.eventBusSub.unsubscribe();
+    }
   }
 }

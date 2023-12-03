@@ -68,13 +68,14 @@ export class AuthService {
     );
   }
 
-  updatePassword(userId: string, newPassword:string): Observable<any> {
+  updatePassword(userId: string, newPassword:string, blocked=true): Observable<any> {
     return this.http.post(
       AUTH_API + 'change-password',
       {
         userId,
       
-        userPassword: newPassword
+        userPassword: newPassword,
+        blocked
         
       },
       httpOptions

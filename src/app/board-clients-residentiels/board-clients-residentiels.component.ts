@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { ClientsService } from '../_services/clients.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-board-clients-residentiels',
@@ -8,22 +10,36 @@ import { UserService } from '../_services/user.service';
 })
 export class BoardClientsResidentielsComponent implements OnInit {
 
-  permission=true;
-  content?: string;
+  displayedColumns: string[] = ['nom', 'prenom', 'type']; 
 
-  constructor(private userService: UserService) { }
+  content?: string;
+  permission=true;
+
+  totalElements: number = 0;
+  size: number = 10;
+  page: number = 0;
+  clients: any;
+
+  constructor(private userService: UserService,private clientsService: ClientsService) { }
 
   ngOnInit(): void {
-    this.userService.getCientsResidentielsBoard().subscribe({
+   this.getClients();
+  }
+
+  getClients(){
+    this.clientsService.getClientsResidential(this.page, this.size).subscribe({
       next: data => {
-        this.content = data;
+        this.clients = data.content;
+        this.totalElements = data.totalElements;
+     
       },
       error: err => {
-        this.permission=false;
+       this. permission=false;
         if (err.error) {
           try {
             const res = JSON.parse(err.error);
             this.content = res.message;
+            
           } catch {
             this.content = `Error with status: ${err.status} - ${err.statusText}`;
           }
@@ -33,5 +49,12 @@ export class BoardClientsResidentielsComponent implements OnInit {
       }
     });
   }
+
+  onPageChange(event: PageEvent) {
+    this.page = event.pageIndex;
+    this.size = event.pageSize;
+    this.getClients();
+  }
+
 
 }

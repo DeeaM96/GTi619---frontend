@@ -10,6 +10,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardClientsResidentielsComponent } from './board-clients-residentiels/board-clients-residentiels.component';
 import { BoardUtilisateursComponent } from './board-utilisateurs/board-utilisateurs.component';
 import { BoardClientsAffairesComponent } from './board-clients-affaires/board-clients-affaires.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   { path: 'tableau-de-bord', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'clients-affaires', component: BoardClientsAffairesComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
   { path: 'clients-residentiels', component: BoardClientsResidentielsComponent },
   { path: 'utilisateurs', component: BoardUtilisateursComponent },
 

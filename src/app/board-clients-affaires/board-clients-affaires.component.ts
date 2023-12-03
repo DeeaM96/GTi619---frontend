@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { ClientsService } from '../_services/clients.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-board-clients-affaires',
@@ -8,15 +10,28 @@ import { UserService } from '../_services/user.service';
 })
 export class BoardClientsAffairesComponent implements OnInit {
 
+  displayedColumns: string[] = ['nom', 'prenom', 'type']; 
+
   content?: string;
   permission=true;
 
-  constructor(private userService: UserService) { }
+  totalElements: number = 0;
+  size: number = 10;
+  page: number = 0;
+  clients: any;
+
+  constructor(private userService: UserService,private clientsService: ClientsService) { }
 
   ngOnInit(): void {
-    this.userService.getCientsAffairesBoard().subscribe({
+   this.getClients();
+  }
+
+  getClients(){
+    this.clientsService.getClientsAffaire(this.page, this.size).subscribe({
       next: data => {
-        this.content = data;
+        this.clients = data.content;
+        this.totalElements = data.totalElements;
+     
       },
       error: err => {
        this. permission=false;
@@ -33,6 +48,12 @@ export class BoardClientsAffairesComponent implements OnInit {
         }
       }
     });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.page = event.pageIndex;
+    this.size = event.pageSize;
+    this.getClients();
   }
 
 }
