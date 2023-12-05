@@ -37,23 +37,23 @@ export class ChangePasswordComponent implements OnInit {
 
   onUpdatePassword() {
     if (this.newPassword !== this.confirmNewPassword) {
-      // Handle password mismatch
-      console.error("Passwords do not match!");
-      this.errorMessage="Passwords do not match!";
+      // Gérer la non-concordance des mots de passe
+      console.error("Les mots de passe ne correspondent pas!");
+      this.errorMessage="Les mots de passe ne correspondent pas!";
       return;
     }
 
-    // Call AuthService to update the password
+    // Appeler le service d'authentification pour mettre à jour le mot de passe
     this.authService.updatePassword(this.user.id,  this.newPassword,false)
       .subscribe(
         success => {
-          // Handle success
-          console.log("Password updated successfully");
+          // Gérer le succès
+          console.log("Mot de passe mit à jour avec succès");
           this.authService.login(this.user.username, this.newPassword).subscribe({
             next: data => {
             
               this.storageService.saveUser(data);
-              this.eventBusService.emit(new EventData('login',null), data); // Emitting login event
+              this.eventBusService.emit(new EventData('login',null), data); // emission de l'evenement login
 
               this.isLoginFailed = false;
               this.isLoggedIn = true;
@@ -70,8 +70,8 @@ export class ChangePasswordComponent implements OnInit {
           });
         },
         error => {
-          // Handle error
-          console.error("Error updating password", error);
+          // HGérer l'erreur
+          console.error("Erreur lors de la mise à jour du mot de passe", error);
           this.errorMessage=error.error.message;
         }
       );

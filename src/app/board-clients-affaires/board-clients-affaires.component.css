@@ -3,9 +3,9 @@
     color: white;
   }
   
-  /* Change color of table rows if needed */
+  /* Changer la couleur des lignes du tableau si nécessaire */
   .mat-row, .mat-cell {
-    background-color: white!important; /* Or any other color */
-    color: black; /* Or any other color */
+    background-color: white!important; /* ou une autre couleur */
+    color: black; /* ou une autre couleur */
   }
   

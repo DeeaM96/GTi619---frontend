@@ -1,16 +1,16 @@
 mat-form-field {
-    width: 100%; /* Full width */
-    display: block; /* Each field on a new line */
-    margin-bottom: 15px; /* Spacing between fields */
+    width: 100%; /* pleine largeur */
+    display: block; /* chaque champ sur une nouvelle ligne */
+    margin-bottom: 15px; /* espacement entre les champs */
   }
 
   mat-checkbox {
-    width: 100%; /* Full width */
-    display: block; /* Each field on a new line */
-    margin-bottom: 15px; /* Spacing between fields */
+    width: 100%; /* pleine largeur */
+    display: block; /* chaque champ sur une nouvelle ligne */
+    margin-bottom: 15px; /* espacement entre les champs */
   }
   
-  /* Centering the form within the dialog */
+  /* centrer le formulaire dans la boîte de dialogue  */
   .mat-dialog-content {
     display: flex;
     flex-direction: column;

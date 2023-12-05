@@ -41,10 +41,10 @@ export class BoardClientsResidentielsComponent implements OnInit {
             this.content = res.message;
             
           } catch {
-            this.content = `Error with status: ${err.status} - ${err.statusText}`;
+            this.content = `Erreur avec le staut: ${err.status} - ${err.statusText}`;
           }
         } else {
-          this.content = `Error with status: ${err.status}`;
+          this.content = `Erreur avec le statut: ${err.status}`;
         }
       }
     });

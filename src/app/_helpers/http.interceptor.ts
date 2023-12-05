@@ -20,7 +20,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       catchError((error) => {
-        // logout when token is expired
+        // déconnexion quand le token est expiré
 /*
         if (
           error instanceof HttpErrorResponse &&

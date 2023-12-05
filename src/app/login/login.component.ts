@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       next: data => {
       
         this.storageService.saveUser(data);
-        this.eventBusService.emit(new EventData('login',null), data); // Emitting login event
+        this.eventBusService.emit(new EventData('login',null), data); // emission de l'evenement login
 
 
         this.isLoginFailed = false;

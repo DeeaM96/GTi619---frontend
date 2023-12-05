@@ -1,24 +1,24 @@
-/* Style for the form fields */
+/* Style pour les champs de type formulaire */
 mat-form-field {
-    width: 100%; /* Full width */
-    display: block; /* Each field on a new line */
-    margin-bottom: 15px; /* Spacing between fields */
+    width: 100%; /* Pleine largeur */
+    display: block; /* Chaque champ sur une nouvelle ligne */
+    margin-bottom: 15px; /* Espacement entre les champs */
   }
   
-  /* Centering the form within the dialog */
+  /* Centrer le formulaire dans la boite de dialogue */
   .mat-dialog-content {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  /* Optional: Adjust the width of the dialog content */
+  /* Optionnel: centrer le formulaire dans la boite de dialogue */
   .mat-dialog-content form {
-    width: 80%; /* Adjust as needed */
+    width: 80%; /* Ajuster la largeur du formulaire */
   }
   
   .custom-error {
-    color: #f44336; /* Red color for errors */
+    color: #f44336; /* Couleur rouge pour les erreurs */
     font-size: 0.75rem;
     margin-top: 5px;
   }

@@ -22,10 +22,10 @@ export class HomeComponent implements OnInit {
             const res = JSON.parse(err.error);
             this.content = res.message;
           } catch {
-            this.content = `Error with status: ${err.status} - ${err.statusText}`;
+            this.content = `Erreur avec le statut: ${err.status} - ${err.statusText}`;
           }
         } else {
-          this.content = `Error with status: ${err.status}`;
+          this.content = `Erreur avec le statut: ${err.status}`;
         }
       }
     });
