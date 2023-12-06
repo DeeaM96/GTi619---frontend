@@ -44,14 +44,14 @@ export class CreateUserDialogComponent implements OnInit {
         }
       });
     
-      // proceed with form submission
+      // soumettre les données au service d'authentification
     } else {
-      this.errorMessage="Passwords do not match!";
+      this.errorMessage="Les mots de passe ne correspondent pas!";
     }
   }
 
   checkPasswords(): void {
-    // Use this method to compare the password and confirm password
+    // compare les mots de passe
     this.passwordMismatch = this.userData.password !== this.userData.confirmPassword;
   }
 }

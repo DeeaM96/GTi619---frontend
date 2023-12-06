@@ -15,7 +15,7 @@ import { UpdatePasswordDialogComponent } from './UpdatePasswordDialog/UpdatePass
 export class BoardUtilisateursComponent implements OnInit {
 
   content?: string;
-  dataSource: User[] = [];  // 
+  dataSource: User[] = [];  // donnees a afficher dans le tableau
 
   permission=true;
 
@@ -42,14 +42,14 @@ export class BoardUtilisateursComponent implements OnInit {
   addRole(user: User): void {
     const dialogRef = this.dialog.open(UpdateUserRolesDialogComponent, {
       width: '500px',
-      data: { userRoles: user.roles, username:user.username } // Pass the current roles of the user
+      data: { userRoles: user.roles, username:user.username } // transmettre les roles actuels de l'utilisateur
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Dialog result:', result);
         this.reloadUserList();
-        // Call service to update user roles
+        // appeler le service pour mettre à jour les roles de l'utilisateur
       }
     });
   }
@@ -62,7 +62,7 @@ export class BoardUtilisateursComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if (result) {
-        // If the result is true, user was created successfully
+        // si le resultat est vrai, recharger la liste des utilisateurs -> le nouvel utilisateur à été créé avec succès
         this.reloadUserList();
       }
     });
@@ -83,14 +83,14 @@ export class BoardUtilisateursComponent implements OnInit {
   modifyPassword(user: User) {
     const dialogRef = this.dialog.open(UpdatePasswordDialogComponent, {
       width: '300px',
-      data: { user: user } // Pass the current roles of the user
+      data: { user: user } // transmettre les roles actuels de l'utilisateur
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Dialog result:', result);
         this.reloadUserList();
-        // Call service to update user roles
+        // appeler le service pour mettre à jour les roles de l'utilisateur
       }
     });
   }

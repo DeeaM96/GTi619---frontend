@@ -69,7 +69,7 @@ import { ToastrModule } from 'ngx-toastr';
    ReactiveFormsModule,
    MatCheckboxModule,
    ToastrModule.forRoot({
-    positionClass: 'toast-top-center' // or 'toast-bottom-left'
+    positionClass: 'toast-top-center' // ou 'toast-bottom-left'
   }),
 
    

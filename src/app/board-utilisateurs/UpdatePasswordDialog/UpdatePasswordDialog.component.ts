@@ -29,9 +29,9 @@ export class UpdatePasswordDialogComponent implements OnInit {
 
   onUpdatePassword() {
     if (this.newPassword !== this.confirmNewPassword) {
-      // Handle password mismatch
-      console.error("Passwords do not match!");
-      this.errorMessage="Passwords do not match!";
+      // Gérer la non-concordance des mots de passe
+      console.error("Les mots de passe ne correspondent pas!");
+      this.errorMessage="Les mots de passe ne correspondent pas";
       return;
     }
 
@@ -40,12 +40,12 @@ export class UpdatePasswordDialogComponent implements OnInit {
       .subscribe(
         success => {
           // Handle success
-          console.log("Password updated successfully");
+          console.log("Mot de passe mit à jour avec succès");
           this.dialogRef.close();
         },
         error => {
           // Handle error
-          console.error("Error updating password", error);
+          console.error("Erreur lors de la mise à jour du mot de passe", error);
           this.errorMessage=error.error.message || error.error;
         }
       );

@@ -46,14 +46,14 @@ export class BoardAdminComponent implements OnInit {
     let settings: {[key: string]: string} = {};
   
     switch (this.activeTabIndex) {
-      case 0: // Login Settings Tab
+      case 0: // onglet paramètres de connexion
         settings = {
           'MAX_LOGIN_ATTEMPTS': this.loginSettingsForm.maxLoginAttempts.toString(),
           'MAX_LOGIN_ATTEMPTS_BEFORE_DISABLE': this.loginSettingsForm.maxLoginAttemptsBeforeDisable.toString(),
           'LOGIN_RETRY_INTERVAL': this.loginSettingsForm.loginRetryInterval.toString()
         };
         break;
-      case 1: // Password Settings Tab
+      case 1: // onglet paramètres de connexion
         settings = {
           'PASSWORD_MIN_LENGTH': this.passwordSettingsForm.minLength.toString(),
           'PASSWORD_REQUIRE_UPPERCASE': this.passwordSettingsForm.requireUppercase.toString(),
@@ -62,14 +62,14 @@ export class BoardAdminComponent implements OnInit {
           'PASSWORD_REQUIRE_SPECIAL': this.passwordSettingsForm.requireSpecial.toString()
         };
         break;
-      case 2: // Password Change Settings Tab
+      case 2: // onglet paramètres de connexion
         settings = {
           'PASSWORD_REUSE_HISTORY': this.passwordChangeSettingsForm.reuseHistory.toString(),
           'PASSWORD_CHANGE_INTERVAL': this.passwordChangeSettingsForm.changeInterval.toString()
         };
         break;
       default:
-        console.error('Invalid tab index');
+        console.error('index d\'onglet inconnu');
         return;
     }
   
@@ -125,10 +125,10 @@ export class BoardAdminComponent implements OnInit {
             const res = JSON.parse(err.error);
             this.content = res.message;
           } catch {
-            this.content = `Error with status: ${err.status} - ${err.statusText}`;
+            this.content = `Erreur avec le statut: ${err.status} - ${err.statusText}`;
           }
         } else {
-          this.content = `Error with status: ${err.status}`;
+          this.content = `Error avec le statut: ${err.status}`;
         }
       }
     });
