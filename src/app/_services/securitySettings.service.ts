@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class SecuritySettingsService {
 
-  private baseUrl = 'http://localhost:5050/api/security-settings';
+  private baseUrl = 'http://localhost:6060/api/security-settings';
 
   constructor(private http: HttpClient) { }
 

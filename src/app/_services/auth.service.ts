@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const AUTH_API = 'http://localhost:5050/api/auth/';
+const AUTH_API = 'http://localhost:6060/api/auth/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -81,4 +81,15 @@ export class AuthService {
       httpOptions
     );
   }
+
+
+  checkValidUser(userId: string): Observable<any> {
+    return this.http.get(
+      AUTH_API + 'isValid/' +userId,
+     
+      httpOptions
+    );
+  }
+
+  
 }

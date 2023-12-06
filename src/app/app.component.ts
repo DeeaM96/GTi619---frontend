@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { StorageService } from './_services/storage.service';
 import { AuthService } from './_services/auth.service';
 import { EventBusService } from './_shared/event-bus.service';
@@ -21,6 +21,10 @@ export class AppComponent {
 
   eventBusSub?: Subscription;
 
+  private readonly checkInterval = 5 * 1000; // 10 minutes in milliseconds
+   isValid!: Subscription;
+
+
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
@@ -33,6 +37,7 @@ export class AppComponent {
 
     if (this.isLoggedIn) {
       this.updateUserState();
+      this.startSubscriptionCheck();
     } else {
       this.router.navigate(['/login']);
     }
@@ -57,6 +62,46 @@ export class AppComponent {
     this.eventBusSub = this.eventBusService.on('logout', () => {
       this.logout();
     });
+  }
+
+  private startSubscriptionCheck() {
+     debugger;
+    if (this.storageService.isLoggedIn()) {
+      debugger;
+      const user = this.storageService.getUser();
+      if (!user ) {
+        console.error("Invalid user object or missing customerId");
+        return;
+      }
+
+      this.isValid = interval(this.checkInterval).subscribe(
+        async () => {
+          try {
+            const isValid =await this.authService.checkValidUser(
+                    user.id
+                  )   .subscribe({
+                    next: (response: any) => {
+                      if(response.blocked){
+                        this.logout();
+                      }
+                    },
+                    error: (err) => {
+                      console.error("Error checking valid:", err);
+                    
+                    },
+                  });;
+
+           
+      
+           
+          } catch (error) {
+            console.error("Error during valid check:", error);
+          }
+        }
+      );
+    } else {
+      console.log("User not authenticated, skipping valid check");
+    }
   }
 
   updateUserState(): void {
