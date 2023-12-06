@@ -32,3 +32,10 @@ npm run start
 ```
 
 L'application sera accessible à l'adresse `http://localhost:4200/`.
+
+
+POur le certificat, il faut generer un nouveau certificat pour votre machine: 
+
+1. Installer mkcert 
+2.  `mkcert -install`
+3. `mkcert localhost`

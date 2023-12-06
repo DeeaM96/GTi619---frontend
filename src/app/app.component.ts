@@ -1,35 +1,34 @@
-import { Component } from '@angular/core';
-import { Subscription, interval } from 'rxjs';
-import { StorageService } from './_services/storage.service';
-import { AuthService } from './_services/auth.service';
-import { EventBusService } from './_shared/event-bus.service';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { Subscription, interval } from "rxjs";
+import { StorageService } from "./_services/storage.service";
+import { AuthService } from "./_services/auth.service";
+import { EventBusService } from "./_shared/event-bus.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
-  showPrepAff=false;
-  showPrepRes=false;
+  showPrepAff = false;
+  showPrepRes = false;
   showModeratorBoard = false;
   username?: string;
 
   eventBusSub?: Subscription;
 
   private readonly checkInterval = 5 * 1000; // 10 minutes in milliseconds
-   isValid!: Subscription;
-
+  isValid!: Subscription;
 
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
     private eventBusService: EventBusService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,10 +38,10 @@ export class AppComponent {
       this.updateUserState();
       this.startSubscriptionCheck();
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(["/login"]);
     }
-  
-    this.eventBusSub = this.eventBusService.on('login',() => {
+
+    this.eventBusSub = this.eventBusService.on("login", () => {
       this.isLoggedIn = true;
       this.updateUserState();
     });
@@ -55,50 +54,40 @@ export class AppComponent {
     //   this.showPrepAff = this.roles.includes('ROLE_PREP_AFF') ||   this.roles.includes('ROLE_ADMIN');
     //   this.showPrepRes = this.roles.includes('ROLE_PREP_RES') ||   this.roles.includes('ROLE_ADMIN');
 
-
     //   this.username = user.username;
     // }
 
-    this.eventBusSub = this.eventBusService.on('logout', () => {
+    this.eventBusSub = this.eventBusService.on("logout", () => {
       this.logout();
     });
   }
 
   private startSubscriptionCheck() {
-     debugger;
+    debugger;
     if (this.storageService.isLoggedIn()) {
       debugger;
       const user = this.storageService.getUser();
-      if (!user ) {
+      if (!user) {
         console.error("Invalid user object or missing customerId");
         return;
       }
 
-      this.isValid = interval(this.checkInterval).subscribe(
-        async () => {
-          try {
-            const isValid =await this.authService.checkValidUser(
-                    user.id
-                  )   .subscribe({
-                    next: (response: any) => {
-                      if(response.blocked){
-                        this.logout();
-                      }
-                    },
-                    error: (err) => {
-                      console.error("Error checking valid:", err);
-                    
-                    },
-                  });;
-
-           
-      
-           
-          } catch (error) {
-            console.error("Error during valid check:", error);
-          }
+      this.isValid = interval(this.checkInterval).subscribe(async () => {
+        try {
+          await this.authService.checkValidUser().subscribe({
+            next: (response: any) => {
+              if (response.blocked) {
+                this.logout();
+              }
+            },
+            error: (err) => {
+              console.error("Error checking valid:", err);
+            },
+          });
+        } catch (error) {
+          console.error("Error during valid check:", error);
         }
-      );
+      });
     } else {
       console.log("User not authenticated, skipping valid check");
     }
@@ -107,24 +96,26 @@ export class AppComponent {
   updateUserState(): void {
     const user = this.storageService.getUser();
     this.roles = user.roles;
-  
-    this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-    this.showPrepAff = this.roles.includes('ROLE_PREP_AFF') || this.roles.includes('ROLE_ADMIN');
-    this.showPrepRes = this.roles.includes('ROLE_PREP_RES') || this.roles.includes('ROLE_ADMIN');
+
+    this.showAdminBoard = this.roles.includes("ROLE_ADMIN");
+    this.showPrepAff =
+      this.roles.includes("ROLE_PREP_AFF") || this.roles.includes("ROLE_ADMIN");
+    this.showPrepRes =
+      this.roles.includes("ROLE_PREP_RES") || this.roles.includes("ROLE_ADMIN");
     this.username = user.username;
   }
 
   logout(): void {
     this.authService.logout().subscribe({
-      next: res => {
+      next: (res) => {
         console.log(res);
         this.storageService.clean();
 
         window.location.reload();
       },
-      error: err => {
+      error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
